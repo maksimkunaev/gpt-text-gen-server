@@ -18,5 +18,9 @@ COPY . .
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
+# Set environment variables
+ENV MODEL_NAME=ggml-gpt4all-j-v1.3-groovy
+ENV MODEL_PATH=/model/groovy
+
 # Run the application when the container launches
 CMD [ "node", "main.js" ]

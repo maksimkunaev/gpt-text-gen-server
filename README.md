@@ -1,66 +1,83 @@
-# GPT-4All Node.js Server
+# GPT-4all Node Server
 
-This project is a simple implementation of an API endpoint using ExpressJS to interact with GPT-4All.
+This project is a simple express server that uses GPT-4all, a module for generating text using OpenAI's GPT-4. The project is containerized with Docker.
 
 ## Requirements
 
 - Docker
-- Node.js version 16 or above
-- NPM version 7 or above
+- Node.js (Version 14.0 or later)
+- npm (Node Package Manager)
 
-## Steps to Run
+## Steps to run the project
 
-1. Clone the Repository:
-   ```
-   git clone <repository_url>
-   ```
-   Navigate to the project directory.
-   ```
-   cd <project_directory>
-   ```
-2. Build the Docker Image:
+1. **Clone the repository**
 
-   ```
-   docker build -t gpt4all-node-server .
-   ```
+```bash
+git clone https://github.com/user/repo.git
+cd repo
+```
 
-   This command builds the docker image from the Dockerfile and tags it as `gpt4all-node-server`.
+2. **Build Docker Image**
 
-3. Run the Docker Image:
+The Dockerfile included in this repository is used to create a Docker image of the application. Run the following command to build the image.
 
-   ```
-   docker run -p 3000:80 gpt4all-node-server
-   ```
+```bash
+docker build -t gpt4all-node-server .
+```
 
-   This command runs the docker image you just built. `-p 3000:80` maps the port 3000 of your machine to the port 80 of the docker container. You can replace 3000 with any other port you wish to use.
+3. **Run Docker Container**
 
-4. Test the Server:
-   You can now interact with the API using curl, Postman, or any other similar tool. Here is an example of how to use curl:
-   ```
-   curl -X POST -H "Content-Type: application/json" -d '{
-       "prompt": [
-           {
-               "role": "system",
-               "content": "You are meant to be annoying and unhelpful."
-           },
-           {
-               "role": "user",
-               "content": "tell a joke"
-           }
-       ],
-       "options": {
-           "temp": 0.9,
-           "verbose": true
-       }
-   }' http://localhost:3000/generate-text
-   ```
+You need to specify some environment variables when running the container.
 
-## Notes
+- `MODEL_NAME` is the name of the GPT-4 model you want to use.
+- `MODEL_PATH` is the path to the directory where the model is stored.
 
-1. Make sure Docker and Node.js are properly installed on your machine.
-2. In the Dockerfile, we are exposing port 80, so in your docker run command you have to map your machine's port to 80.
-3. Ensure the `gpt4all` module and other requirements in the `package.json` file are properly installed during the Docker image creation.
-4. Make sure to replace `<repository_url>` and `<project_directory>` with actual values.
-5. If you're not using Docker, ensure to use the correct command to start your application as defined in your `package.json` file's scripts section, like `npm start` or `node main.js`, depending on your setup.
-6. Remember that the GPT-4 model file path is specified to be `/home/random/private/models/groovy/`, please ensure to replace this with the actual file path where your model is located.
-7. The endpoint `/generate-text` is a POST request that accepts JSON data. It requires a `prompt` and `options` to generate a text completion.
+You also need to map a port in the container to a port on your host machine. In this example, we are mapping port 3000 on the host machine to port 80 in the container.
+
+Here's the command to run the container:
+
+```bash
+docker run -p 3000:80 -v /home/random/private/models/groovy:/model/groovy --env MODEL_NAME=ggml-gpt4all-j-v1.3-groovy --env MODEL_PATH=/model/groovy --network=host gpt4all-node-server
+```
+
+4. **Testing the API**
+
+To test the API, you can use `curl` to send a POST request to the `/generate-text` endpoint. Here's an example:
+
+```bash
+curl -X POST -H "Content-Type: application/json" -d '{
+    "prompt": [
+        {
+            "role": "system",
+            "content": "You are meant to be annoying and unhelpful."
+        },
+        {
+            "role": "user",
+            "content": "who are you"
+        }
+    ],
+    "options": {
+        "temp": 0.9,
+        "verbose": true
+    }
+}' http://localhost:3000/generate-text
+```
+
+5. **Check the Response**
+
+The response will be a JSON object representing the generated text. For example:
+
+```json
+{
+  "message": {
+    "role": "assistant",
+    "content": " I am your friend, I always have your back and always give you advice."
+  }
+}
+```
+
+## Troubleshooting
+
+If you encounter any issues while running the project, please check the Docker logs for the container. You can do this by running `docker logs <container_id>`, where `<container_id>` is the ID of the Docker container running the application.
+
+If you need further assistance, please open an issue in the GitHub repository.
