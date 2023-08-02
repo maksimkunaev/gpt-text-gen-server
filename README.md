@@ -1,6 +1,6 @@
 # GPT-4all Node Server
 
-This project is a simple express server that uses GPT-4all, a module for generating text using OpenAI's GPT-4. The project is containerized with Docker.
+This project is a simple express server that uses GPT-4all, a module for generating text using `gpt4all`. The project is containerized with Docker.
 
 ## Requirements
 
@@ -29,7 +29,7 @@ docker build -t gpt4all-node-server .
 
 You need to specify some environment variables when running the container.
 
-- `MODEL_NAME` is the name of the GPT-4 model you want to use.
+- `MODEL_NAME` is the name of the GPT4ALL model you want to use.
 - `MODEL_PATH` is the path to the directory where the model is stored.
 
 You also need to map a port in the container to a port on your host machine. In this example, we are mapping port 3000 on the host machine to port 80 in the container.
@@ -52,7 +52,7 @@ Here's what you need to replace:
 
 - **CONTAINER_PORT** - Replace this with the port number inside the Docker container that the application is set to run on (usually this is 80, as set in the Dockerfile).
 
-- **PATH_TO_YOUR_MODEL_ON_HOST** - Replace this with the absolute path on your host machine to the directory containing your GPT-4 model.
+- **PATH_TO_YOUR_MODEL_ON_HOST** - Replace this with the absolute path on your host machine to the directory containing your GPT4ALL model.
 
 - **YOUR_MODEL_NAME** - Replace this with the name of your GPT-4 model.
 
