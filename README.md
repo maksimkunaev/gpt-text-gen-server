@@ -13,8 +13,8 @@ This project is a simple express server that uses GPT-4all, a module for generat
 1. **Clone the repository**
 
 ```bash
-git clone https://github.com/user/repo.git
-cd repo
+git clone https://github.com/maksimkunaev/gpt-text-gen-server.git
+cd gpt-text-gen-server
 ```
 
 2. **Build Docker Image**
@@ -37,7 +37,7 @@ You also need to map a port in the container to a port on your host machine. In 
 Here's the command to run the container:
 
 ```bash
-docker run -p 3000:80 -v /home/random/private/models/groovy:/model/groovy --env MODEL_NAME=ggml-gpt4all-j-v1.3-groovy --env MODEL_PATH=/model/groovy --network=host gpt4all-node-server
+docker run -p 3000:80 -v /home/random/private/models/groovy:/model --env MODEL_NAME=ggml-gpt4all-j-v1.3-groovy --env MODEL_PATH=/model --network=host gpt4all-node-server
 ```
 
 4. **Testing the API**
