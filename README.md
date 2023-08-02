@@ -40,6 +40,25 @@ Here's the command to run the container:
 docker run -p 3000:80 -v /home/random/private/models/groovy:/model --env MODEL_NAME=ggml-gpt4all-j-v1.3-groovy --env MODEL_PATH=/model --network=host gpt4all-node-server
 ```
 
+Here's a template where the parts that need to be replaced are indicated:
+
+```bash
+docker run -p LOCAL_PORT:CONTAINER_PORT -v PATH_TO_YOUR_MODEL_ON_HOST:/model --env MODEL_NAME=YOUR_MODEL_NAME --env MODEL_PATH=/model --network=host DOCKER_IMAGE_NAME
+```
+
+Here's what you need to replace:
+
+- **LOCAL_PORT** - Replace this with the port number on your local machine where you want to access the application.
+
+- **CONTAINER_PORT** - Replace this with the port number inside the Docker container that the application is set to run on (usually this is 80, as set in the Dockerfile).
+
+- **PATH_TO_YOUR_MODEL_ON_HOST** - Replace this with the absolute path on your host machine to the directory containing your GPT-4 model.
+
+- **YOUR_MODEL_NAME** - Replace this with the name of your GPT-4 model.
+
+- **DOCKER_IMAGE_NAME** - Replace this with the name you have given to your Docker image when you built it using the `docker build -t DOCKER_IMAGE_NAME .` command.
+
+
 4. **Testing the API**
 
 To test the API, you can use `curl` to send a POST request to the `/generate-text` endpoint. Here's an example:
