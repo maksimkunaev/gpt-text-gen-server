@@ -54,7 +54,7 @@ Here's what you need to replace:
 
 - **PATH_TO_YOUR_MODEL_ON_HOST** - Replace this with the absolute path on your host machine to the directory containing your GPT4ALL model.
 
-- **YOUR_MODEL_NAME** - Replace this with the name of your GPT-4 model.
+- **YOUR_MODEL_NAME** - Replace this with the name of your GPT4ALL model.
 
 - **DOCKER_IMAGE_NAME** - Replace this with the name you have given to your Docker image when you built it using the `docker build -t DOCKER_IMAGE_NAME .` command.
 
